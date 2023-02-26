@@ -11,15 +11,8 @@ namespace Assignment3Students
     public class Student
     {
 
-
-
         #region Properties-Fields
         private List<string> _history;
-
-        private void AddHistory(string property, string from, string to)
-        {
-            _history.Add(property + ": " + from + "=> " + to);
-        }
 
         public readonly int _id;
         public int ID
@@ -43,13 +36,30 @@ namespace Assignment3Students
                 _name = value;
             }
         }
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                string pattern = @"^\d+@\d+.\d+$";
+                if (Regex.IsMatch(value, pattern))
+                {
+                    _email = value;
+                }
+            }
+        }
 
         private string _major;
         public string Major
         {
             get
             {
-                return _major;
+                if(_isPrivate == false)
+                {
+                    return _major;
+                }
+                return "Access Denied";
             }
             set
             {
@@ -59,24 +69,108 @@ namespace Assignment3Students
         }
 
         private string _startDate;
-        private string _anticipatedGraduationDate;
-        private string _stateProvinceTerritory;
-        private string _country;
-        private string _email;
-        public string Email
+        public string StartDate 
         {
-            get { return _email; }
+            get
+            {
+                if (_isPrivate == false)
+                {
+                    return _major;
+                }
+                return "Access Denied";
+            }
+
             set
             {
-                string pattern = @"^\d+@\d+.\d+$";
-                if(Regex.IsMatch(value, pattern)) 
-                {
-                    _email= value;
-                }
+                AddHistory("StartDate", _startDate, value);
+                _startDate = value;
             }
         }
+        private string _anticipatedGraduationDate;
+        public string AnticipatedGraduationDate 
+        {
+            get
+            {
+                if(_isPrivate == false) 
+                {
+                    return _anticipatedGraduationDate;
+                }
+                return null;
+            }
+
+            set
+            {
+                AddHistory("AnticipatedGraduationDate",_anticipatedGraduationDate,value);
+                _anticipatedGraduationDate = value;
+            }
+        }
+        private string _stateProvinceTerritory;
+        public string StateProvinceTerritory 
+        {
+            get 
+            {
+                if(_isPrivate == false)
+                {
+                    return _stateProvinceTerritory;
+                }
+                return null;
+            }
+
+            set
+            {
+                AddHistory("StateProvinceTerritory",_stateProvinceTerritory, value);
+                _stateProvinceTerritory = value;
+            }
+        }
+        private string _country;
+        public string Country 
+        {
+            get 
+            {
+                if(_isPrivate == false)
+                {
+                    return _country;
+                }
+                return null;
+            }
+            set
+            {
+                AddHistory("Country", _country, value);
+            }
+        }
+
         private int _phoneNumber;
+        public int PhoneNumber
+        {
+            get
+            {
+                if (_isPrivate == false)
+                {
+                    return _phoneNumber;
+                }
+                return 0;
+            }
+            set
+            {
+                AddHistory("PhoneNumber",_phoneNumber.ToString(), value.ToString());
+            }
+        }
         private string _mailingAddress;
+        public string MailingAddress
+        {
+            get
+            {
+                if (_isPrivate == false)
+                {
+                    return _mailingAddress;
+                }
+                return null;
+            }
+            set
+            {
+                AddHistory("MailingAddress",_mailingAddress, value);
+            }
+        }
         private bool _isPrivate = false;
 
 
@@ -91,6 +185,28 @@ namespace Assignment3Students
         #region Methods
 
 
+        private void AddHistory(string property, string from, string to)
+        {
+            _history.Add(property + ": " + from + "=> " + to);
+        }
+
+        void PrintStudentInfo()
+        {
+            Console.Write(_name + ": ");
+            Console.Write(", ID: " + _id);
+            Console.Write(", Email: " + _email);
+            if (_isPrivate == false)
+            {
+                Console.Write(", Major: " + _major);
+                Console.Write(", StartDate: " + _startDate);
+                Console.Write(", GradDate: " + _anticipatedGraduationDate);
+                Console.Write(", Area: " + _stateProvinceTerritory);
+                Console.Write(", Country: " + _country);
+                Console.Write(", PhoneNumber: " + _phoneNumber);
+                Console.Write(", MailingAddress: " + _mailingAddress);
+            }
+            
+        }
 
 
         #endregion
