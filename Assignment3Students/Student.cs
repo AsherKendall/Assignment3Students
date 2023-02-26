@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Assignment3Students
@@ -62,9 +63,22 @@ namespace Assignment3Students
         private string _stateProvinceTerritory;
         private string _country;
         private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                string pattern = @"^\d+@\d+.\d+$";
+                if(Regex.IsMatch(value, pattern)) 
+                {
+                    _email= value;
+                }
+            }
+        }
         private int _phoneNumber;
         private string _mailingAddress;
         private bool _isPrivate = false;
+
 
         #endregion
 
