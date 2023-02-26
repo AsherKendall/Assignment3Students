@@ -139,8 +139,8 @@ namespace Assignment3Students
             }
         }
 
-        private int _phoneNumber;
-        public int PhoneNumber
+        private long _phoneNumber;
+        public long PhoneNumber
         {
             get
             {
@@ -177,11 +177,6 @@ namespace Assignment3Students
         #endregion
 
 
-
-
-
-
-
         #region Methods
 
 
@@ -190,10 +185,10 @@ namespace Assignment3Students
             _history.Add(property + ": " + from + "=> " + to);
         }
 
-        void PrintStudentInfo()
+        public void PrintStudentInfo()
         {
             Console.Write(_name + ": ");
-            Console.Write(", ID: " + _id);
+            Console.Write(" ID: " + _id);
             Console.Write(", Email: " + _email);
             if (_isPrivate == false)
             {
@@ -217,7 +212,7 @@ namespace Assignment3Students
             _id = id;
             _name = name;
         }
-        public Student(int id,string name,string major,string country,string email, int phoneNumber, string mailingAddress)
+        public Student(int id,string name,string major,string country,string email, long phoneNumber, string mailingAddress)
         {
             _id = id;
             _name= name;
