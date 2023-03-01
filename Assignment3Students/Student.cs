@@ -12,7 +12,8 @@ namespace Assignment3Students
     {
 
         #region Properties-Fields
-        private List<string> _history;
+        private List<string> _history = new List<string>();
+        public List<string> History { get { return _history; } }
 
         public readonly int _id;
         public int ID
@@ -42,11 +43,14 @@ namespace Assignment3Students
             get { return _email; }
             set
             {
-                string pattern = @"^\d+@\d+.\d+$";
+                string pattern = @"^.+@.+\..+$";
                 if (Regex.IsMatch(value, pattern))
                 {
+                    AddHistory("Email", _email, value);
                     _email = value;
+                    return;
                 }
+                Console.WriteLine("Email was not valid!");
             }
         }
 
@@ -171,8 +175,9 @@ namespace Assignment3Students
                 AddHistory("MailingAddress",_mailingAddress, value);
             }
         }
-        private bool _isPrivate = false;
+        private bool _isPrivate;
 
+        public bool IsPrivate { set { _isPrivate = value; } get { return _isPrivate; } }
 
         #endregion
 
@@ -200,7 +205,7 @@ namespace Assignment3Students
                 Console.Write(", PhoneNumber: " + _phoneNumber);
                 Console.Write(", MailingAddress: " + _mailingAddress);
             }
-            
+            Console.WriteLine();
         }
 
 
@@ -211,6 +216,7 @@ namespace Assignment3Students
         {
             _id = id;
             _name = name;
+            _isPrivate = false;
         }
         public Student(int id,string name,string major,string country,string email, long phoneNumber, string mailingAddress)
         {
@@ -221,6 +227,7 @@ namespace Assignment3Students
             _email = email;
             _phoneNumber = phoneNumber;
             _mailingAddress = mailingAddress;
+            _isPrivate = false;
         }
         #endregion
 
