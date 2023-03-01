@@ -40,7 +40,13 @@ namespace Assignment3Students
         private string _email;
         public string Email
         {
-            get { return _email; }
+            get {
+                if(_isPrivate == false)
+                {
+                    return _email;
+                }
+                return "Access Denied";
+            }
             set
             {
                 string pattern = @"^.+@.+\..+$";
@@ -208,6 +214,14 @@ namespace Assignment3Students
             Console.WriteLine();
         }
 
+        public void PrintStudentChanges()
+        {
+            foreach (var Change in this.History)
+            {
+                Console.Write(Change + "  ");
+            }
+            Console.WriteLine();
+        }
 
         #endregion
 
